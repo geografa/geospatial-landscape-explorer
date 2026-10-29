@@ -1,0 +1,103 @@
+name: Suggest or correct an entry
+description: Propose a new tool, format, spec, dataset or service, or fix an existing one.
+title: "[data] "
+labels: ["data"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the graph! You don't need to write JSON; a maintainer will turn this into a data change.
+        See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md) for what belongs in the graph.
+
+  - type: dropdown
+    id: change
+    attributes:
+      label: What kind of change?
+      options:
+        - Add a new node
+        - Correct an existing node (URL, license, description, kind, tags)
+        - Add or fix a relationship
+        - Remove an entry (abandoned, duplicate or out of scope)
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: The project or product name, or the existing node id if you're correcting one (it appears in the URL as `?node=...`).
+      placeholder: e.g. Planetiler, or node id `planetiler`
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: Official URL
+      description: Homepage or official documentation.
+      placeholder: https://
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      description: What it primarily is. Skip this if you're only fixing a relationship.
+      options:
+        - library
+        - framework
+        - desktop-app
+        - cli
+        - service
+        - saas
+        - database
+        - server
+        - format
+        - spec
+        - dataset
+        - org
+
+  - type: input
+    id: tags
+    attributes:
+      label: Suggested tags
+      description: Comma-separated, from the controlled list in src/data/schema.ts (e.g. python, raster, cloud-native, open-source).
+
+  - type: input
+    id: license
+    attributes:
+      label: License
+      description: SPDX identifier if open source (e.g. MIT, Apache-2.0), or "Proprietary". Leave it blank if you're unsure.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description or correction
+      description: For a new node, 1–2 neutral sentences on what it is. For a correction, what's wrong and what it should be.
+    validations:
+      required: true
+
+  - type: textarea
+    id: relationships
+    attributes:
+      label: Relationships
+      description: |
+        How it connects to existing nodes, one per line, as `source — type → target`.
+        Types: uses, built-on, part-of, implements, reads, writes, produces, consumes, hosts, renders, alternative-to.
+      placeholder: |
+        planetiler — consumes → openstreetmap
+        planetiler — produces → pmtiles
+        planetiler — alternative-to → tippecanoe
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: Links that back this up (docs, LICENSE file, release notes, adoption evidence).
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Licensing
+      options:
+        - label: I agree that this contribution may be published under CC BY 4.0 as part of the dataset, and I haven't copied the description from another site.
+          required: true
