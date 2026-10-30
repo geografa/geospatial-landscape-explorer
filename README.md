@@ -50,7 +50,7 @@ Every control is a native button or select with an ARIA label. A live region ann
 
 ```
 src/
-  data/graph.json        seed data (173 nodes, 544 edges)
+  data/graph.json        seed data (178 nodes, 598 edges)
   data/schema.ts         Zod schema, Kind/Tag/EdgeType unions, integrity checks
   data/load.ts           validates at load and builds lookup indexes
   graph/useCytoscape.ts  owns the cy instance in a ref and syncs props imperatively
